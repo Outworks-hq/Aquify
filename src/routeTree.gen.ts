@@ -13,8 +13,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as BusinessRouteImport } from './routes/business'
 import { Route as ContributeRouteImport } from './routes/contribute'
+import { Route as ExchangeRouteImport } from './routes/exchange'
 import { Route as IntelligenceRouteImport } from './routes/intelligence'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as OutreachRouteImport } from './routes/outreach'
+import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as SellRouteImport } from './routes/sell'
 import { Route as SourcingRouteImport } from './routes/sourcing'
 
@@ -38,14 +41,29 @@ const ContributeRoute = ContributeRouteImport.update({
   path: '/contribute',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExchangeRoute = ExchangeRouteImport.update({
+  id: '/exchange',
+  path: '/exchange',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IntelligenceRoute = IntelligenceRouteImport.update({
   id: '/intelligence',
   path: '/intelligence',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OutreachRoute = OutreachRouteImport.update({
   id: '/outreach',
   path: '/outreach',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SellRoute = SellRouteImport.update({
@@ -64,8 +82,11 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/business': typeof BusinessRoute
   '/contribute': typeof ContributeRoute
+  '/exchange': typeof ExchangeRoute
   '/intelligence': typeof IntelligenceRoute
+  '/login': typeof LoginRoute
   '/outreach': typeof OutreachRoute
+  '/pricing': typeof PricingRoute
   '/sell': typeof SellRoute
   '/sourcing': typeof SourcingRoute
 }
@@ -74,8 +95,11 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/business': typeof BusinessRoute
   '/contribute': typeof ContributeRoute
+  '/exchange': typeof ExchangeRoute
   '/intelligence': typeof IntelligenceRoute
+  '/login': typeof LoginRoute
   '/outreach': typeof OutreachRoute
+  '/pricing': typeof PricingRoute
   '/sell': typeof SellRoute
   '/sourcing': typeof SourcingRoute
 }
@@ -85,8 +109,11 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/business': typeof BusinessRoute
   '/contribute': typeof ContributeRoute
+  '/exchange': typeof ExchangeRoute
   '/intelligence': typeof IntelligenceRoute
+  '/login': typeof LoginRoute
   '/outreach': typeof OutreachRoute
+  '/pricing': typeof PricingRoute
   '/sell': typeof SellRoute
   '/sourcing': typeof SourcingRoute
 }
@@ -97,8 +124,11 @@ export interface FileRouteTypes {
     | '/about'
     | '/business'
     | '/contribute'
+    | '/exchange'
     | '/intelligence'
+    | '/login'
     | '/outreach'
+    | '/pricing'
     | '/sell'
     | '/sourcing'
   fileRoutesByTo: FileRoutesByTo
@@ -107,8 +137,11 @@ export interface FileRouteTypes {
     | '/about'
     | '/business'
     | '/contribute'
+    | '/exchange'
     | '/intelligence'
+    | '/login'
     | '/outreach'
+    | '/pricing'
     | '/sell'
     | '/sourcing'
   id:
@@ -117,8 +150,11 @@ export interface FileRouteTypes {
     | '/about'
     | '/business'
     | '/contribute'
+    | '/exchange'
     | '/intelligence'
+    | '/login'
     | '/outreach'
+    | '/pricing'
     | '/sell'
     | '/sourcing'
   fileRoutesById: FileRoutesById
@@ -128,8 +164,11 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   BusinessRoute: typeof BusinessRoute
   ContributeRoute: typeof ContributeRoute
+  ExchangeRoute: typeof ExchangeRoute
   IntelligenceRoute: typeof IntelligenceRoute
+  LoginRoute: typeof LoginRoute
   OutreachRoute: typeof OutreachRoute
+  PricingRoute: typeof PricingRoute
   SellRoute: typeof SellRoute
   SourcingRoute: typeof SourcingRoute
 }
@@ -164,6 +203,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContributeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/exchange': {
+      id: '/exchange'
+      path: '/exchange'
+      fullPath: '/exchange'
+      preLoaderRoute: typeof ExchangeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/intelligence': {
       id: '/intelligence'
       path: '/intelligence'
@@ -171,11 +217,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IntelligenceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/outreach': {
       id: '/outreach'
       path: '/outreach'
       fullPath: '/outreach'
       preLoaderRoute: typeof OutreachRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sell': {
@@ -200,8 +260,11 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   BusinessRoute: BusinessRoute,
   ContributeRoute: ContributeRoute,
+  ExchangeRoute: ExchangeRoute,
   IntelligenceRoute: IntelligenceRoute,
+  LoginRoute: LoginRoute,
   OutreachRoute: OutreachRoute,
+  PricingRoute: PricingRoute,
   SellRoute: SellRoute,
   SourcingRoute: SourcingRoute,
 }
