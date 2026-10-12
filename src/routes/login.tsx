@@ -5,7 +5,7 @@ import { pageHead } from "@/components/site/InfoPage";
 import heroViz from "@/assets/hero-viz.jpg";
 
 export const Route = createFileRoute("/login")({
-  validateSearch: (s: Record<string, unknown>): { mode?: "register" } => ({ mode: s["mode"] === "register" ? ("register" as const) : undefined }),
+  validateSearch: (s: Record<string, unknown>): { mode?: "register" | undefined } => ({ mode: s["mode"] === "register" ? ("register" as const) : undefined }),
   head: pageHead("Sign In", "Sign in or create an individual or business AQUIFY account."),
   component: Login,
 });

@@ -16,7 +16,7 @@ const datasets = [
 const cats = ["All", "Business Data", "Consumer Insights", "Market Intelligence"];
 
 export const Route = createFileRoute("/exchange")({
-  validateSearch: (s: Record<string, unknown>): { q?: string } => ({ q: typeof s["q"] === "string" ? (s["q"] as string) : undefined }),
+  validateSearch: (s: Record<string, unknown>): { q?: string | undefined } => ({ q: typeof s["q"] === "string" ? (s["q"] as string) : undefined }),
   head: pageHead("Data Exchange", "Search and exchange verified datasets across industries and regions using data points."),
   component: Exchange,
 });
