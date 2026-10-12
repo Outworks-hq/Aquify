@@ -32,7 +32,7 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="hidden items-center gap-10 lg:flex">
-          <Link to="/login" className="text-[1.05rem] text-primary hover:opacity-80">Sign In</Link>
+          <Link to="/login" search={{}} className="text-[1.05rem] text-primary hover:opacity-80">Sign In</Link>
           <Link to="/login" search={{ mode: "register" }} className="inline-flex h-12 items-center gap-3 rounded-full bg-primary px-8 text-[1.05rem] text-primary-foreground shadow-cta transition hover:bg-burgundy-deep">
             Get Started <ArrowRight className="h-5 w-5" />
           </Link>
@@ -42,7 +42,7 @@ export function SiteHeader() {
       {open && (
         <div className="flex flex-col gap-4 border-t border-border px-[5vw] py-5 lg:hidden">
           {[...nav, ...moreNav].map((n) => <Link key={n.to} to={n.to} onClick={() => setOpen(false)}>{n.label}</Link>)}
-          <Link to="/login" className="text-primary">Sign In</Link>
+          <Link to="/login" search={{}} className="text-primary">Sign In</Link>
         </div>
       )}
     </header>
