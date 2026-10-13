@@ -2,6 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Logo } from "./Logo";
+import { useAuth } from "@/hooks/use-auth";
+import { supabase } from "@/integrations/supabase/client";
 
 const nav = [
   { to: "/exchange", label: "Data Exchange" },
@@ -20,6 +22,8 @@ export const moreNav = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const { user, isAdmin } = useAuth();
+  const signOut = async () => { await supabase.auth.signOut(); window.location.replace("/login"); };
   return (
     <header className="relative z-20 border-b border-border bg-card">
       <div className="mx-auto flex h-[5.2rem] max-w-[96rem] items-center justify-between px-[5vw]">
@@ -32,17 +36,22 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="hidden items-center gap-10 lg:flex">
+          {user ? (<>
+            {isAdmin && <Link to="/admin" className="text-[1.05rem] text-primary hover:opacity-80">Admin</Link>}
+            <button onClick={signOut} className="text-[1.05rem] text-primary hover:opacity-80">Sign Out</button>
+            <Link to="/account" className="inline-flex h-12 items-center gap-3 rounded-full bg-primary px-8 text-[1.05rem] text-primary-foreground shadow-cta transition hover:bg-burgundy-deep">My Account <ArrowRight className="h-5 w-5" /></Link>
+          </>) : (<>
           <Link to="/login" search={{}} className="text-[1.05rem] text-primary hover:opacity-80">Sign In</Link>
           <Link to="/login" search={{ mode: "register" }} className="inline-flex h-12 items-center gap-3 rounded-full bg-primary px-8 text-[1.05rem] text-primary-foreground shadow-cta transition hover:bg-burgundy-deep">
             Get Started <ArrowRight className="h-5 w-5" />
-          </Link>
+          </Link></>)}
         </div>
         <button className="lg:hidden" onClick={() => setOpen(!open)} aria-label="Menu">{open ? <X /> : <Menu />}</button>
       </div>
       {open && (
         <div className="flex flex-col gap-4 border-t border-border px-[5vw] py-5 lg:hidden">
           {[...nav, ...moreNav].map((n) => <Link key={n.to} to={n.to} onClick={() => setOpen(false)}>{n.label}</Link>)}
-          <Link to="/login" search={{}} className="text-primary">Sign In</Link>
+          {user ? <><Link to="/account">My Account</Link><button onClick={signOut} className="text-left text-primary">Sign Out</button></> : <Link to="/login" search={{}} className="text-primary">Sign In</Link>}
         </div>
       )}
     </header>
