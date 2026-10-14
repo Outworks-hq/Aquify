@@ -14,6 +14,81 @@ export type Database = {
   }
   public: {
     Tables: {
+      acquisitions: {
+        Row: {
+          collection_id: string | null
+          created_at: string
+          dataset_id: string
+          id: string
+          notes: string | null
+          points_spent: number
+          status: string
+          tags: string[]
+          user_id: string
+        }
+        Insert: {
+          collection_id?: string | null
+          created_at?: string
+          dataset_id: string
+          id?: string
+          notes?: string | null
+          points_spent?: number
+          status?: string
+          tags?: string[]
+          user_id: string
+        }
+        Update: {
+          collection_id?: string | null
+          created_at?: string
+          dataset_id?: string
+          id?: string
+          notes?: string | null
+          points_spent?: number
+          status?: string
+          tags?: string[]
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "acquisitions_collection_id_fkey"
+            columns: ["collection_id"]
+            isOneToOne: false
+            referencedRelation: "collections"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "acquisitions_dataset_id_fkey"
+            columns: ["dataset_id"]
+            isOneToOne: false
+            referencedRelation: "datasets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      collections: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       contributions: {
         Row: {
           category: string
@@ -44,6 +119,45 @@ export type Database = {
           status?: string
           title?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      datasets: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          fields: string[]
+          id: string
+          name: string
+          points: number
+          records: number
+          region: string
+          sample: Json
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description?: string | null
+          fields?: string[]
+          id?: string
+          name: string
+          points?: number
+          records?: number
+          region: string
+          sample?: Json
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          fields?: string[]
+          id?: string
+          name?: string
+          points?: number
+          records?: number
+          region?: string
+          sample?: Json
         }
         Relationships: []
       }
@@ -127,6 +241,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      acquire_dataset: { Args: { _dataset_id: string }; Returns: string }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

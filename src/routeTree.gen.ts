@@ -22,6 +22,7 @@ import { Route as OutreachRouteImport } from './routes/outreach'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as SellRouteImport } from './routes/sell'
 import { Route as SourcingRouteImport } from './routes/sourcing'
+import { Route as WorkspaceRouteImport } from './routes/workspace'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -88,6 +89,11 @@ const SourcingRoute = SourcingRouteImport.update({
   path: '/sourcing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WorkspaceRoute = WorkspaceRouteImport.update({
+  id: '/workspace',
+  path: '/workspace',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -103,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/pricing': typeof PricingRoute
   '/sell': typeof SellRoute
   '/sourcing': typeof SourcingRoute
+  '/workspace': typeof WorkspaceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -118,6 +125,7 @@ export interface FileRoutesByTo {
   '/pricing': typeof PricingRoute
   '/sell': typeof SellRoute
   '/sourcing': typeof SourcingRoute
+  '/workspace': typeof WorkspaceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -134,6 +142,7 @@ export interface FileRoutesById {
   '/pricing': typeof PricingRoute
   '/sell': typeof SellRoute
   '/sourcing': typeof SourcingRoute
+  '/workspace': typeof WorkspaceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -151,6 +160,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/sell'
     | '/sourcing'
+    | '/workspace'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -166,6 +176,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/sell'
     | '/sourcing'
+    | '/workspace'
   id:
     | '__root__'
     | '/'
@@ -181,6 +192,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/sell'
     | '/sourcing'
+    | '/workspace'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -197,6 +209,7 @@ export interface RootRouteChildren {
   PricingRoute: typeof PricingRoute
   SellRoute: typeof SellRoute
   SourcingRoute: typeof SourcingRoute
+  WorkspaceRoute: typeof WorkspaceRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -292,6 +305,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SourcingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/workspace': {
+      id: '/workspace'
+      path: '/workspace'
+      fullPath: '/workspace'
+      preLoaderRoute: typeof WorkspaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -309,6 +329,7 @@ const rootRouteChildren: RootRouteChildren = {
   PricingRoute: PricingRoute,
   SellRoute: SellRoute,
   SourcingRoute: SourcingRoute,
+  WorkspaceRoute: WorkspaceRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
