@@ -65,6 +65,45 @@ export type Database = {
           },
         ]
       }
+      campaigns: {
+        Row: {
+          body: string | null
+          created_at: string
+          follow_up_days: number | null
+          id: string
+          name: string
+          scheduled_for: string | null
+          status: string
+          subject: string | null
+          target_group: string | null
+          user_id: string
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          follow_up_days?: number | null
+          id?: string
+          name: string
+          scheduled_for?: string | null
+          status?: string
+          subject?: string | null
+          target_group?: string | null
+          user_id: string
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          follow_up_days?: number | null
+          id?: string
+          name?: string
+          scheduled_for?: string | null
+          status?: string
+          subject?: string | null
+          target_group?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       collections: {
         Row: {
           created_at: string
@@ -85,6 +124,81 @@ export type Database = {
           description?: string | null
           id?: string
           name?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      connections: {
+        Row: {
+          connector: string
+          created_at: string
+          id: string
+          label: string | null
+          last_sync_at: string | null
+          records_contributed: number
+          status: string
+          user_id: string
+        }
+        Insert: {
+          connector: string
+          created_at?: string
+          id?: string
+          label?: string | null
+          last_sync_at?: string | null
+          records_contributed?: number
+          status?: string
+          user_id: string
+        }
+        Update: {
+          connector?: string
+          created_at?: string
+          id?: string
+          label?: string | null
+          last_sync_at?: string | null
+          records_contributed?: number
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      contacts: {
+        Row: {
+          company: string | null
+          created_at: string
+          email: string | null
+          grp: string | null
+          id: string
+          industry: string | null
+          name: string
+          notes: string | null
+          role: string | null
+          unsubscribed: boolean
+          user_id: string
+        }
+        Insert: {
+          company?: string | null
+          created_at?: string
+          email?: string | null
+          grp?: string | null
+          id?: string
+          industry?: string | null
+          name: string
+          notes?: string | null
+          role?: string | null
+          unsubscribed?: boolean
+          user_id: string
+        }
+        Update: {
+          company?: string | null
+          created_at?: string
+          email?: string | null
+          grp?: string | null
+          id?: string
+          industry?: string | null
+          name?: string
+          notes?: string | null
+          role?: string | null
+          unsubscribed?: boolean
           user_id?: string
         }
         Relationships: []
@@ -158,6 +272,92 @@ export type Database = {
           records?: number
           region?: string
           sample?: Json
+        }
+        Relationships: []
+      }
+      entitlements: {
+        Row: {
+          created_at: string
+          feature: string
+          id: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          feature: string
+          id?: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          feature?: string
+          id?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      org_members: {
+        Row: {
+          created_at: string
+          department: string | null
+          email: string
+          id: string
+          org_id: string
+          role: string
+          status: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          department?: string | null
+          email: string
+          id?: string
+          org_id: string
+          role?: string
+          status?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          department?: string | null
+          email?: string
+          id?: string
+          org_id?: string
+          role?: string
+          status?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "org_members_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      organizations: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          owner_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          owner_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          owner_id?: string
         }
         Relationships: []
       }
@@ -241,7 +441,9 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      accept_invite: { Args: { _member: string }; Returns: undefined }
       acquire_dataset: { Args: { _dataset_id: string }; Returns: string }
+      has_feature: { Args: { _f: string }; Returns: boolean }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -249,6 +451,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      org_role: { Args: { _org: string }; Returns: string }
       review_contribution: {
         Args: { _approve: boolean; _id: string; _points: number }
         Returns: undefined
