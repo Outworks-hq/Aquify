@@ -15,6 +15,13 @@
       "when": 1791938446161,
       "tag": "0001_exchange_and_workspace",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792031185966,
+      "tag": "0002_connect_outreach_orgs",
+      "breakpoints": true
     }
   ]
 }
