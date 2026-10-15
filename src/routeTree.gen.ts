@@ -13,11 +13,14 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AosRouteImport } from './routes/aos'
 import { Route as BusinessRouteImport } from './routes/business'
+import { Route as ConnectRouteImport } from './routes/connect'
 import { Route as ContributeRouteImport } from './routes/contribute'
 import { Route as ExchangeRouteImport } from './routes/exchange'
 import { Route as IntelligenceRouteImport } from './routes/intelligence'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as OrganizationRouteImport } from './routes/organization'
 import { Route as OutreachRouteImport } from './routes/outreach'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as SellRouteImport } from './routes/sell'
@@ -44,9 +47,19 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AosRoute = AosRouteImport.update({
+  id: '/aos',
+  path: '/aos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BusinessRoute = BusinessRouteImport.update({
   id: '/business',
   path: '/business',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConnectRoute = ConnectRouteImport.update({
+  id: '/connect',
+  path: '/connect',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContributeRoute = ContributeRouteImport.update({
@@ -67,6 +80,11 @@ const IntelligenceRoute = IntelligenceRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrganizationRoute = OrganizationRouteImport.update({
+  id: '/organization',
+  path: '/organization',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OutreachRoute = OutreachRouteImport.update({
@@ -100,11 +118,14 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/account': typeof AccountRoute
   '/admin': typeof AdminRoute
+  '/aos': typeof AosRoute
   '/business': typeof BusinessRoute
+  '/connect': typeof ConnectRoute
   '/contribute': typeof ContributeRoute
   '/exchange': typeof ExchangeRoute
   '/intelligence': typeof IntelligenceRoute
   '/login': typeof LoginRoute
+  '/organization': typeof OrganizationRoute
   '/outreach': typeof OutreachRoute
   '/pricing': typeof PricingRoute
   '/sell': typeof SellRoute
@@ -116,11 +137,14 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/account': typeof AccountRoute
   '/admin': typeof AdminRoute
+  '/aos': typeof AosRoute
   '/business': typeof BusinessRoute
+  '/connect': typeof ConnectRoute
   '/contribute': typeof ContributeRoute
   '/exchange': typeof ExchangeRoute
   '/intelligence': typeof IntelligenceRoute
   '/login': typeof LoginRoute
+  '/organization': typeof OrganizationRoute
   '/outreach': typeof OutreachRoute
   '/pricing': typeof PricingRoute
   '/sell': typeof SellRoute
@@ -133,11 +157,14 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/account': typeof AccountRoute
   '/admin': typeof AdminRoute
+  '/aos': typeof AosRoute
   '/business': typeof BusinessRoute
+  '/connect': typeof ConnectRoute
   '/contribute': typeof ContributeRoute
   '/exchange': typeof ExchangeRoute
   '/intelligence': typeof IntelligenceRoute
   '/login': typeof LoginRoute
+  '/organization': typeof OrganizationRoute
   '/outreach': typeof OutreachRoute
   '/pricing': typeof PricingRoute
   '/sell': typeof SellRoute
@@ -151,11 +178,14 @@ export interface FileRouteTypes {
     | '/about'
     | '/account'
     | '/admin'
+    | '/aos'
     | '/business'
+    | '/connect'
     | '/contribute'
     | '/exchange'
     | '/intelligence'
     | '/login'
+    | '/organization'
     | '/outreach'
     | '/pricing'
     | '/sell'
@@ -167,11 +197,14 @@ export interface FileRouteTypes {
     | '/about'
     | '/account'
     | '/admin'
+    | '/aos'
     | '/business'
+    | '/connect'
     | '/contribute'
     | '/exchange'
     | '/intelligence'
     | '/login'
+    | '/organization'
     | '/outreach'
     | '/pricing'
     | '/sell'
@@ -183,11 +216,14 @@ export interface FileRouteTypes {
     | '/about'
     | '/account'
     | '/admin'
+    | '/aos'
     | '/business'
+    | '/connect'
     | '/contribute'
     | '/exchange'
     | '/intelligence'
     | '/login'
+    | '/organization'
     | '/outreach'
     | '/pricing'
     | '/sell'
@@ -200,11 +236,14 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AccountRoute: typeof AccountRoute
   AdminRoute: typeof AdminRoute
+  AosRoute: typeof AosRoute
   BusinessRoute: typeof BusinessRoute
+  ConnectRoute: typeof ConnectRoute
   ContributeRoute: typeof ContributeRoute
   ExchangeRoute: typeof ExchangeRoute
   IntelligenceRoute: typeof IntelligenceRoute
   LoginRoute: typeof LoginRoute
+  OrganizationRoute: typeof OrganizationRoute
   OutreachRoute: typeof OutreachRoute
   PricingRoute: typeof PricingRoute
   SellRoute: typeof SellRoute
@@ -242,11 +281,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/aos': {
+      id: '/aos'
+      path: '/aos'
+      fullPath: '/aos'
+      preLoaderRoute: typeof AosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/business': {
       id: '/business'
       path: '/business'
       fullPath: '/business'
       preLoaderRoute: typeof BusinessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/connect': {
+      id: '/connect'
+      path: '/connect'
+      fullPath: '/connect'
+      preLoaderRoute: typeof ConnectRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contribute': {
@@ -275,6 +328,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/organization': {
+      id: '/organization'
+      path: '/organization'
+      fullPath: '/organization'
+      preLoaderRoute: typeof OrganizationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/outreach': {
@@ -320,11 +380,14 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AccountRoute: AccountRoute,
   AdminRoute: AdminRoute,
+  AosRoute: AosRoute,
   BusinessRoute: BusinessRoute,
+  ConnectRoute: ConnectRoute,
   ContributeRoute: ContributeRoute,
   ExchangeRoute: ExchangeRoute,
   IntelligenceRoute: IntelligenceRoute,
   LoginRoute: LoginRoute,
+  OrganizationRoute: OrganizationRoute,
   OutreachRoute: OutreachRoute,
   PricingRoute: PricingRoute,
   SellRoute: SellRoute,
