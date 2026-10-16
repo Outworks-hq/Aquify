@@ -73,6 +73,7 @@ function Admin() {
             {!pending.length && <li className="py-3 text-muted-foreground">Nothing waiting for review.</li>}
           </ul>
         </section>
+        <AccessRequests name={name} />
         <section className="mt-8 rounded-xl border border-border bg-card p-6 shadow-soft">
           <h2 className="text-lg font-semibold">Members</h2>
           <ul className="mt-4 divide-y divide-border text-sm">
@@ -82,5 +83,32 @@ function Admin() {
       </main>
       <SiteFooter />
     </div>
+  );
+}
+
+type Ent = { id: string; user_id: string; feature: string; status: string; created_at: string };
+const featureName: Record<string, string> = { connect: "AQUIFY Connect", outreach: "Outreach System", organization: "Organization workspace" };
+
+function AccessRequests({ name }: { name: (id: string) => string }) {
+  const [rows, setRows] = useState<Ent[]>([]);
+  const load = () => { supabase.from("entitlements").select("*").order("created_at", { ascending: false }).then(({ data }) => setRows((data as Ent[]) ?? [])); };
+  useEffect(load, []);
+  const set = async (id: string, status: string) => { await supabase.from("entitlements").update({ status }).eq("id", id); load(); };
+  return (
+    <section className="mt-8 rounded-xl border border-border bg-card p-6 shadow-soft">
+      <h2 className="text-lg font-semibold">Paid feature access</h2>
+      <ul className="mt-4 divide-y divide-border text-sm">
+        {rows.map((r) => (
+          <li key={r.id} className="flex flex-wrap items-center justify-between gap-3 py-3">
+            <span>{name(r.user_id)} · {featureName[r.feature] ?? r.feature} <span className="capitalize text-muted-foreground">· {r.status}</span></span>
+            <div className="flex gap-2">
+              {r.status !== "active" && <button onClick={() => set(r.id, "active")} className="rounded-full bg-primary px-4 py-1 text-primary-foreground">Activate</button>}
+              {r.status === "active" && <button onClick={() => set(r.id, "suspended")} className="rounded-full border border-border px-4 py-1">Suspend</button>}
+            </div>
+          </li>
+        ))}
+        {!rows.length && <li className="py-3 text-muted-foreground">No access requests.</li>}
+      </ul>
+    </section>
   );
 }

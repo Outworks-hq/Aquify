@@ -1,0 +1,12 @@
+# AQUIFY roadmap
+- [x] Data Exchange with real datasets, preview, acquire with points
+- [x] Information Workspace (collections, tags, notes, status, export)
+- [x] AQUIFY Connect (catalog, connections, revoke) — provider authorization pending
+- [x] AQUIFY Outreach System (contacts, groups, campaigns, scheduling) — email provider pending
+- [x] Organization (create, invite, roles, departments, accept invite)
+- [x] Admin: activate paid feature requests
+- [ ] Online billing (needs payment provider setup)
+- [ ] Real connector authorization + sync workers
+- [ ] Email sending provider for outreach and invitations
+- [ ] Paid Data Intelligence orders, Sell Your Data offers
+- [ ] Admin portal: dataset management, connection oversight

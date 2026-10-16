@@ -20,12 +20,28 @@ export const moreNav = [
   { to: "/outreach", label: "Outreach" },
 ] as const;
 
+export const appNav = [
+  { to: "/workspace", label: "Workspace" },
+  { to: "/connect", label: "Connect" },
+  { to: "/aos", label: "Outreach" },
+  { to: "/organization", label: "Organization" },
+] as const;
+
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const { user, isAdmin } = useAuth();
   const signOut = async () => { await supabase.auth.signOut(); window.location.replace("/login"); };
   return (
     <header className="relative z-20 border-b border-border bg-card">
+      {user && (
+        <div className="border-b border-border bg-muted/40">
+          <div className="mx-auto flex max-w-[96rem] gap-6 overflow-x-auto px-[5vw] py-2 text-sm">
+            {[{ to: "/account", label: "Account" }, ...appNav].map((n) => (
+              <Link key={n.to} to={n.to} className="whitespace-nowrap text-muted-foreground hover:text-primary" activeProps={{ className: "text-primary font-medium" }}>{n.label}</Link>
+            ))}
+          </div>
+        </div>
+      )}
       <div className="mx-auto flex h-[5.2rem] max-w-[96rem] items-center justify-between px-[5vw]">
         <Logo />
         <nav className="hidden items-center gap-12 lg:flex">
@@ -51,7 +67,7 @@ export function SiteHeader() {
       {open && (
         <div className="flex flex-col gap-4 border-t border-border px-[5vw] py-5 lg:hidden">
           {[...nav, ...moreNav].map((n) => <Link key={n.to} to={n.to} onClick={() => setOpen(false)}>{n.label}</Link>)}
-          {user ? <><Link to="/account">My Account</Link><button onClick={signOut} className="text-left text-primary">Sign Out</button></> : <Link to="/login" search={{}} className="text-primary">Sign In</Link>}
+          {user ? <><Link to="/account">My Account</Link>{appNav.map((n) => <Link key={n.to} to={n.to} onClick={() => setOpen(false)}>{n.label}</Link>)}<button onClick={signOut} className="text-left text-primary">Sign Out</button></> : <Link to="/login" search={{}} className="text-primary">Sign In</Link>}
         </div>
       )}
     </header>
