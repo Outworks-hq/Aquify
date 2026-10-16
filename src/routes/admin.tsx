@@ -73,6 +73,7 @@ function Admin() {
             {!pending.length && <li className="py-3 text-muted-foreground">Nothing waiting for review.</li>}
           </ul>
         </section>
+        <AccessRequests name={name} />
         <section className="mt-8 rounded-xl border border-border bg-card p-6 shadow-soft">
           <h2 className="text-lg font-semibold">Members</h2>
           <ul className="mt-4 divide-y divide-border text-sm">
